@@ -29,9 +29,15 @@
       <tr>
         <th></th>
         <td>
-          @if ($errors->has('fullname'))
-            <span>{{ $errors->first('fullname') }}</span>
+          @if ($errors->has('familyname'))
+            <span>{{ $errors->first('familyname') }}</span>
           @endif
+
+          {{-- これ良い感じの間隔で開けれんからエラーメッセージ作る --}}
+          @if ($errors->has('lastname'))
+            <span>{{ $errors->first('lastname') }}</span>
+          @endif
+          
           <div class="side">
             <div class="side-item left">
               <p class="example">例）山田</p>

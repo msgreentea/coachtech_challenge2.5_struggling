@@ -55,8 +55,8 @@ class ChallengeController extends Controller
         return view('system');
     }
 
-    // public function find(ChallengeRequest $request)
-    public function find(Request $request)
+    public function find(ChallengeRequest $request)
+    // public function find(Request $request)
     {
 
         // dd($request);
@@ -78,8 +78,8 @@ class ChallengeController extends Controller
         return view('system', $items);
     }
 
-    // public function delete(ChallengeRequest $request)
-    public function delete(Request $request)
+    public function delete(ChallengeRequest $request, $id)
+    // public function delete(Request $request)
     {
         Contact::find($request->id)->delete();
         return redirect('/');
