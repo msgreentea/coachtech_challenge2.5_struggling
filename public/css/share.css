@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100%;
+}
+h1 {
+  text-align: center;
+  font-size: 28px;
+}
+table {
+  margin: 0 auto;
+  width: 80%;
+  border-collapse: collapse;
+}
+button {
+  display: block;
+  margin: 20px auto;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 5px 50px;
+  border-radius: 3px;
+}
+a {
+  color: black;
+  display: block;
+  text-align: center;
+}
+
+th {
+  width: 20%;
+  text-align: left;
+}
+.radio {
+  display: flex;
+  align-items: center;
+  /* width: 100px; */
+}
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  margin: 30px 30px 30px 0;
+  /* margin: 30px; */
+  justify-content: left;
+  transform: scale(2);
+  border: 1px solid #ccc;
+}
+.center {
+  text-align: center;
+}
+.side {
+  display: flex;
+  align-items: center;
+}

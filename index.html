@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./share.css">
+  <link rel="stylesheet" href="./style.css">
+  <title>お問い合わせ</title>
+</head>
+<body>
+  <h1>お問い合わせ</h1>
+
+  <form action="" method="post">
+    <table>
+      <!-- 名前 -->
+      <tr>
+        <th>お名前<span>※</span></th>
+        <td class="side">
+          <div class="left">
+            <input type="text" name="familyname">
+          </div>
+          <div class="right">
+            <input type="text" name="lastname">
+          </div>
+        </td>
+      </tr>
+      <tr class="invisible">
+        <th class="invisible"></th>
+        <td class="invisible">
+          <div class="side">
+            <div class="left">
+              <p class="example">例）山田</p>
+            </div>
+            <div class="right">
+              <p class="example">例）太郎</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <!-- 性別 -->
+      <tr>
+        <th class="th">性別<span>※</span></th>
+        <td class="td radio-side">
+          <div class="radio">
+            <input type="radio" name="gender" id="male" value="male" checked="checked">
+            <label for="male">男性</label>
+            <!-- <p>男性</p> -->
+          </div>
+          <div class="radio">
+            <input type="radio" name="gender" id="female" value="female">
+            <label for="female">女性</label>
+            <!-- <p>女性</p> -->
+          </div>
+          <!-- <input type="radio" name="gender" value="male" checked="checked">男性
+          <input type="radio" name="gender" value="female">女性 -->
+        </td>
+      </tr>
+      <!-- メールアドレス -->
+      <tr>
+        <th class="th">メールアドレス<span>※</span></th>
+        <td class="td">
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <p class="example">例）test@example.com</p>
+        </td>
+      </tr>
+      <!-- 郵便番号 -->
+      <tr>
+        <th>郵便番号<span>※</span></th>
+        <td class="side">
+          <div class="postcode-left">
+            <p class="bold-text">〒</p>
+          </div>
+          <div class="right">
+            <input type="text">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="side">
+          <div class="right">
+            <p class="example">例）123-4567</p>
+          </div>
+        </td>
+      </tr>
+      <!-- 住所 -->
+      <tr>
+        <th>住所<span>※</span></th>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <p class="example">例）東京都渋谷区千駄ヶ谷1-2-3</p>
+        </td>
+      </tr>
+      <!-- 建物名 -->
+      <tr>
+        <th>建物名<span>※</span></th>
+        <td>
+          <input type="text" name="building_name">
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <p class="example">例）千駄ヶ谷マンション101</p>
+        </td>
+      </tr>
+      <tr>
+        <th>ご意見<span>※</span></th>
+        <td><textarea name="opinion" id="" cols="30" rows="10"></textarea></td>
+      </tr>
+    </table>
+    <button>送信</button>
+  </form>
+</body>
+</html>
