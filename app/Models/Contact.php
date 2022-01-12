@@ -13,12 +13,24 @@ class Contact extends Model
         'id'
     ];
 
+    // public static $rules()
+    // {
+    //     return [
+    //         'familyname' => 'required',
+    //         'lastname' => 'required',
+    //         'gender' => 'required',
+    //         'email' => 'required | email',
+    //         'postcode' => 'required | min:8',
+    //         'address' => 'required',
+    //         'opinion' => 'required | max:120'
+    //     ];
+    // }
+
+
     public static $rules = array(
-        // 'fullname' => 'required',
         'familyname' => 'required',
         'lastname' => 'required',
         'gender' => 'required',
-        // 'email' => 'required | email:rfc, dns',
         'email' => 'required | email',
         'postcode' => 'required | min:8',
         'address' => 'required',

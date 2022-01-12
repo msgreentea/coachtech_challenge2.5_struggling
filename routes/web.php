@@ -7,6 +7,7 @@ use App\Http\Controllers\ChallengeController;
 // お問い合わせフォーム
 Route::get('/', [ChallengeController::class, 'form'])->name('form');
 Route::get('/confirm', [ChallengeController::class, 'confirm'])->name('confirm');
+// Route::get('/register', [ChallengeController::class, 'register'])->name('register');
 Route::post('/register', [ChallengeController::class, 'register'])->name('register');
 
 // システム管理

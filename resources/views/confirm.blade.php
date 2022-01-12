@@ -13,6 +13,7 @@
 
 @section('content')
   <form action="{{ route('register') }}" method="POST">
+  {{-- <form action="{{ route('register') }}" method="get"> --}}
     @csrf
     <table>
       <tr>

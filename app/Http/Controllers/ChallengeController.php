@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Http\Requests\ChallengeRequest;
 use App\Models\Contact;
 
@@ -15,6 +15,7 @@ class ChallengeController extends Controller
     }
 
     public function confirm(ChallengeRequest $request)
+    // public function confirm(Request $request)
     {
 
         $fullname = $request->familyname . " " . $request->lastname;
@@ -38,7 +39,8 @@ class ChallengeController extends Controller
         return view('confirm', $items);
     }
 
-    public function register(ChallengeRequest $request)
+    public function register(Request $request)
+    // public function register(ChallengeRequest $request)
     {
         $data = $request->all();
         Contact::create($data);
@@ -53,7 +55,8 @@ class ChallengeController extends Controller
         return view('system');
     }
 
-    public function find(ChallengeRequest $request)
+    // public function find(ChallengeRequest $request)
+    public function find(Request $request)
     {
 
         // dd($request);
@@ -75,7 +78,8 @@ class ChallengeController extends Controller
         return view('system', $items);
     }
 
-    public function delete(ChallengeRequest $request)
+    // public function delete(ChallengeRequest $request)
+    public function delete(Request $request)
     {
         Contact::find($request->id)->delete();
         return redirect('/');
