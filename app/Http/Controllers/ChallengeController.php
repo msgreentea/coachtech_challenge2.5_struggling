@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\ChallengeRequest;
 use App\Models\Contact;
 
 class ChallengeController extends Controller
 {
     // お問い合わせフォーム
-    public function index(Request $request)
+    public function form()
     {
-        return view('index');
+        return view('form');
     }
 
-    public function confirm(Request $request)
+    public function confirm(ChallengeRequest $request)
     {
-        $this->validate($request, Contact::$rules);
 
         $fullname = $request->familyname . " " . $request->lastname;
         $gender = $request->gender;
@@ -38,7 +38,7 @@ class ChallengeController extends Controller
         return view('confirm', $items);
     }
 
-    public function add(Request $request)
+    public function register(ChallengeRequest $request)
     {
         $data = $request->all();
         Contact::create($data);
@@ -53,7 +53,7 @@ class ChallengeController extends Controller
         return view('system');
     }
 
-    public function find(Request $request)
+    public function find(ChallengeRequest $request)
     {
 
         // dd($request);
@@ -75,7 +75,7 @@ class ChallengeController extends Controller
         return view('system', $items);
     }
 
-    public function delete(Request $request)
+    public function delete(ChallengeRequest $request)
     {
         Contact::find($request->id)->delete();
         return redirect('/');

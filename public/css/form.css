@@ -2,17 +2,16 @@ span {
   color: red;
   padding-left: 5px;
 }
+.bold-text {
+  font-weight: bold;
+  align-items: center;
+}
+.example {
+  color: gray;
+  padding-left: 20px;
+}
 
-.th {
-  padding: 10px 0;
-}
-.td {
-  padding: 10px 0;
-}
-.invisible {
-  height: -30px;
-  line-height: -30px;
-}
+
 
 input {
   padding: 10px;
@@ -29,27 +28,15 @@ textarea {
   border: 1px solid #ccc;
 }
 
-.bold-text {
-  font-weight: bold;
-  align-items: center;
-}
 
-.example {
-  color: gray;
-  padding-left: 20px;
-}
 
 .side {
   justify-content: space-between;
 }
-.left,
-.right {
+.side-item {
   width: 100%;
 }
 .left {
-  padding-right: 15px;
-}
-.postcode-left {
   padding-right: 15px;
 }
 

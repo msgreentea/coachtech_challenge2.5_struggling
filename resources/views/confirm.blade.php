@@ -2,7 +2,6 @@
 
 
 @section('css')
-  <link rel="stylesheet" href="{{ asset('/css/share.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/confirm.css') }}">
 @endsection
 
@@ -13,7 +12,7 @@
 
 
 @section('content')
-  <form action="{{ route('add') }}" method="POST">
+  <form action="{{ route('register') }}" method="POST">
     @csrf
     <table>
       <tr>
@@ -60,5 +59,5 @@
     </table>
     <button>送信する</button>
   </form>
-  <a href="{{ route('index') }}">修正する</a>
+  <a href="{{ route('form') }}">修正する</a>
 @endsection
