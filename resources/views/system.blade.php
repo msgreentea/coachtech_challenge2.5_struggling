@@ -13,12 +13,14 @@
 
 @section('content')
   <div class="container">
-    <form action="{{ route('find') }}" method="POST">
+    {{-- <form action="{{ route('find') }}" method="POST"> --}}
+    <form action="{{ route('find') }}" method="get">
       @csrf
       <div class="side">
         <!-- お名前 -->
         <div class="name side">
           <div class="th">お名前</div>
+          {{-- <div class="td"><input type="text" name="fullname" value="{{ request('fullname') }}"></div> --}}
           <div class="td"><input type="text" name="fullname" value="{{ request('fullname') }}"></div>
         </div>
         <!-- 性別 -->
@@ -47,11 +49,21 @@
   <!-- result -->
   <div class="container">
     <div class="side">
-      <p>全35件中　件</p>
-      {{-- ページング機能させたい --}}
-      {{-- {{ $item->links() }} --}}
-      {{-- {{ $institutions->appends(request()->input())->links() }}
-    </div> --}}
+      <div class="side-item">
+        {{-- @if (count($items) >0)
+          <p>全{{ $items->total() }}件中
+              {{  ($items->currentPage() -1) * $items->perPage() + 1}} - 
+              {{ (($items->currentPage() -1) * $items->perPage() + 1) + (count($items) -1)  }}件のデータが表示されています。</p>
+        @else
+        <p>データがありません。</p>
+        @endif  --}}
+      </div>
+      <div class="side-item">
+        {{-- {{ $items->links() }} --}}
+        {{-- {{ $data->appends(request()->input())->links() }} --}}
+      </div>
+      {{-- <p>全35件中　件</p> --}}
+
   </div>
   <table>
     <tr>
@@ -65,7 +77,8 @@
     @if (isset($items))
     @foreach ($items as $item)
     <tr>
-      <form action="{{ route('delete', ['id' => $task->id]) }}" method="POST">
+      {{-- <form action="{{ route('delete', ['id' => $task->id]) }}" method="POST"> --}}
+      <form action="{{ route('delete', ['id' => $item->id]) }}" method="POST">
       @csrf
         <td>{{ $item->id }}</td>
         <td>{{ $item->fullname }}</td>
@@ -80,6 +93,7 @@
         <td><button>削除</button></td>
       </form>
     </tr>
+    {{-- {{ $form->links() }}  --}}
     @endforeach
     @endif
   </table>

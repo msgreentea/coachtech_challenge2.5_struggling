@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ChallengeRequest;
 use App\Models\Contact;
+use Illuminate\Pagination\Paginator;
 
 class ChallengeController extends Controller
 {
     // お問い合わせフォーム
-    public function form()
+    public function form(ChallengeRequest $request)
     {
         return view('form');
     }
@@ -52,35 +53,54 @@ class ChallengeController extends Controller
     // システム管理
     public function system()
     {
+        // $data = Contact::simplePaginate(10);
+        // return view('system', $data);
         return view('system');
     }
 
-    public function find(ChallengeRequest $request)
+    public function find(Request $request)
     // public function find(Request $request)
     {
+        $keyword = $request->all();
+        // dd($keyword);
+        $query = Contact::query();
+        if ($keyword !== null) {
+            $query->where('familyname', 'LIKE', "%{$keyword}%")
+                ->orwhere('lastname', 'LIKE', "%{$keyword}%")
+                ->orwhere('gender', 'LIKE', "%{$request->gender}%")
+                ->orwhere('created_at', 'LIKE', "%{$request->created_at}%")
+                ->orwhere('email', 'LIKE', "%{$request->email}%");
+        }
+        $pagination = $query->orderBy('created_at', 'desc')->paginate(10);
 
-        // dd($request);
-        $form = Contact::where([
-            'fullname', 'LIKE', "%{$request->fullname}%",
-            'gender', 'LIKE', "%{$request->gender}%",
-            'created_at', 'LIKE', "%{$request->created_at}%",
-            'email', 'LIKE', "%{$request->email}%",
-        ])->get();
+        // todoアプリ２の検索の方法
+        // $keyword = Contact::where('fullname', 'LIKE', "%{$request->fullname}%")
+        //     ->orwhere('gender', 'LIKE', "%{$request->gender}%")
+        //     ->orwhere('created_at', 'LIKE', "%{$request->created_at}%")
+        //     ->orwhere('email', 'LIKE', "%{$request->email}%")->get();
+
+        // $pagination = Contact::paginate(10);
+
+        // $fullname = $request->fullname;
 
         $items = [
-            'form' => $form,
+            'keyword' => $keyword,
             'fullname' => $request->fullname,
             'gender' => $request->gender,
             'created_at' => $request->created_at,
-            'email' => $request->email
+            'email' => $request->email,
+            'pagination' => $pagination
         ];
 
         return view('system', $items);
+        // return view('test', $items);
     }
 
     public function delete(ChallengeRequest $request, $id)
     // public function delete(Request $request)
     {
+        // Contact::find($request->id)->delete();
+        $data = Contact::find($id);
         Contact::find($request->id)->delete();
         return redirect('/');
     }
