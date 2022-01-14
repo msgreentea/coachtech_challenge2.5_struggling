@@ -16,7 +16,6 @@ class ChallengeController extends Controller
     }
 
     public function confirm(ChallengeRequest $request)
-    // public function confirm(Request $request)
     {
 
         $fullname = $request->familyname . " " . $request->lastname;
@@ -41,7 +40,6 @@ class ChallengeController extends Controller
     }
 
     public function register(Request $request)
-    // public function register(ChallengeRequest $request)
     {
         $data = $request->all();
         Contact::create($data);
@@ -55,48 +53,46 @@ class ChallengeController extends Controller
     {
         // $data = Contact::simplePaginate(10);
         // return view('system', $data);
-        return view('system');
+        $items = Contact::all();
+        return view('system', $items);
     }
 
     public function find(Request $request)
-    // public function find(Request $request)
     {
-        $keyword = $request->all();
-        // dd($keyword);
-        $query = Contact::query();
-        if ($keyword !== null) {
-            $query->where('familyname', 'LIKE', "%{$keyword}%")
-                ->orwhere('lastname', 'LIKE', "%{$keyword}%")
-                ->orwhere('gender', 'LIKE', "%{$request->gender}%")
-                ->orwhere('created_at', 'LIKE', "%{$request->created_at}%")
-                ->orwhere('email', 'LIKE', "%{$request->email}%");
-        }
-        $pagination = $query->orderBy('created_at', 'desc')->paginate(10);
+        // AND検索
+        $result = Contact::where('fullname', 'LIKE', "%{$request->fullname}%")
+            ->where('gender', 'LIKE', "%{$request->gender}%")
+            // ->where('created_at', 'LIKE', "%{$request->created_at}%")
+            ->whereDate('created_at', 'LIKE', "%{$request->created_at}%")
+            ->where('email', 'LIKE', "%{$request->email}%")->get();
 
-        // todoアプリ２の検索の方法
-        // $keyword = Contact::where('fullname', 'LIKE', "%{$request->fullname}%")
+
+
+
+        // $keyword = Contact::when($request->gender == 1) {
+        //     $query->where('fullname', 'LIKE', "%{$request->fullname}%")
         //     ->orwhere('gender', 'LIKE', "%{$request->gender}%")
         //     ->orwhere('created_at', 'LIKE', "%{$request->created_at}%")
         //     ->orwhere('email', 'LIKE', "%{$request->email}%")->get();
+        // }
 
         // $pagination = Contact::paginate(10);
 
-        // $fullname = $request->fullname;
-
         $items = [
-            'keyword' => $keyword,
+            // 'query' => $query,
+            // 'keyword' => $keyword,
+            'result' => $result,
             'fullname' => $request->fullname,
             'gender' => $request->gender,
             'created_at' => $request->created_at,
             'email' => $request->email,
-            'pagination' => $pagination
+            // 'pagination' => $pagination
         ];
-        dd($items);
+        // dd($items);
         return view('system', $items);
-        // return view('test', $items);
     }
 
-    public function delete(ChallengeRequest $request, $id)
+    public function delete(Request $request, $id)
     // public function delete(Request $request)
     {
         // Contact::find($request->id)->delete();

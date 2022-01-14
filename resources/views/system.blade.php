@@ -13,8 +13,7 @@
 
 @section('content')
   <div class="container">
-    {{-- <form action="{{ route('find') }}" method="POST"> --}}
-    <form action="{{ route('find') }}" method="get">
+    <form action="{{ route('find') }}" method="POST">
       @csrf
       <div class="side">
         <!-- お名前 -->
@@ -26,9 +25,9 @@
         <!-- 性別 -->
         <div class="gender side">
           <div class="th">性別</div>
-          <label><input type="radio" name="gender" value="all" checked>全て</label>
-          <label><input type="radio" name="gender" value="male">男性</label>
-          <label><input type="radio" name="gender" value="female">女性</label>
+          <label><input type="radio" name="gender" value="" checked>全て</label>
+          <label><input type="radio" name="gender" value="1">男性</label>
+          <label><input type="radio" name="gender" value="2">女性</label>
         </div>
       </div>
       <!-- 登録日 -->
@@ -77,7 +76,6 @@
     @if (isset($items))
     @foreach ($items as $item)
     <tr>
-      {{-- <form action="{{ route('delete', ['id' => $task->id]) }}" method="POST"> --}}
       <form action="{{ route('delete', ['id' => $item->id]) }}" method="POST">
       @csrf
         <td>{{ $item->id }}</td>
@@ -93,7 +91,6 @@
         <td><button>削除</button></td>
       </form>
     </tr>
-    {{-- {{ $form->links() }}  --}}
     @endforeach
     @endif
   </table>
