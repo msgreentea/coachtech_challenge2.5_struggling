@@ -12,4 +12,4 @@ Route::post('/register', [ChallengeController::class, 'register'])->name('regist
 // システム管理
 Route::get('/system', [ChallengeController::class, 'system'])->name('system');
 Route::post('/find', [ChallengeController::class, 'find'])->name('find');
-Route::post('/delete/{$id}', [ChallengeController::class, 'delete'])->name('delete');
+Route::post('/delete/{id}', [ChallengeController::class, 'delete'])->name('delete');

@@ -74,14 +74,19 @@
       <th>ご意見</th>
       <th></th>
     </tr>
-    @if (isset($result))
+    @if (isset($results))
     @foreach ($results as $result)
     <tr>
       <form action="{{ route('delete', ['id' => $result->id]) }}" method="POST">
       @csrf
         <td>{{ $result->id }}</td>
         <td>{{ $result->fullname }}</td>
-        <td>{{ $result->gender }}</td>
+        @if ($result->gender == 1)
+            <td>男性</td>
+        @endif
+        @if ($result->gender == 2)
+            <td>女性</td>
+        @endif
         <td>{{ $result->email }}</td>
         <td>{{ $result->opinion }}</td>
         <input type="hidden" name="id" value="{{ $result->id }}">
