@@ -10,7 +10,7 @@ use Illuminate\Pagination\Paginator;
 class ChallengeController extends Controller
 {
     // お問い合わせフォーム
-    public function form(ChallengeRequest $request)
+    public function form()
     {
         return view('form');
     }
@@ -91,7 +91,7 @@ class ChallengeController extends Controller
             'email' => $request->email,
             'pagination' => $pagination
         ];
-
+        dd($items);
         return view('system', $items);
         // return view('test', $items);
     }
