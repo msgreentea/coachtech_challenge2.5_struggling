@@ -28,6 +28,7 @@ a {
   color: black;
   display: block;
   text-align: center;
+  /* width: fit-content; */
 }
 
 th {

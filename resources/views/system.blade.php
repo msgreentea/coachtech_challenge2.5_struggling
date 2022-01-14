@@ -88,13 +88,13 @@
             <td>女性</td>
         @endif
         <td>{{ $result->email }}</td>
-        <td>{{ $result->opinion }}</td>
+        <td>{{ Str::limit($result->opinion, 25, '…') }}</td>
         <input type="hidden" name="id" value="{{ $result->id }}">
         <input type="hidden" name="fullname" value="{{ $result->fullname }}">
         <input type="hidden" name="gender" value="{{ $result->gender }}">
         <input type="hidden" name="email" value="{{ $result->email }}">
-        <input type="hidden" name="opinion" value="{{ Str::limit($result->opinion, 25, '(…)') }}">
-        <td><button>削除</button></td>
+        <input type="hidden" name="opinion" value="{{ $result->opinion }}">
+        <td><button class="btn">削除</button></td>
       </form>
     </tr>
 
