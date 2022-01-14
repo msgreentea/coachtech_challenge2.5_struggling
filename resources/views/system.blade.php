@@ -16,13 +16,12 @@
     <form action="{{ route('find') }}" method="POST">
       @csrf
       <div class="side">
-        <!-- お名前 -->
+        <!-- name -->
         <div class="name side">
           <div class="th">お名前</div>
-          {{-- <div class="td"><input type="text" name="fullname" value="{{ request('fullname') }}"></div> --}}
           <div class="td"><input type="text" name="fullname" value="{{ request('fullname') }}"></div>
         </div>
-        <!-- 性別 -->
+        <!-- gender -->
         <div class="gender side">
           <div class="th">性別</div>
           <label><input type="radio" name="gender" value="" checked>全て</label>
@@ -30,12 +29,12 @@
           <label><input type="radio" name="gender" value="2">女性</label>
         </div>
       </div>
-      <!-- 登録日 -->
+      <!-- created_at -->
       <div class="date side">
         <div class="th">登録日</div>
         <input type="text" name="created_at" value="{{ request('created_at') }}"> ~ <input type="text" name="created_at" value="{{ request('created_at') }}">
       </div>
-      <!-- メールアドレス -->
+      <!-- email -->
       <div class="email side">
         <div class="th">メールアドレス</div>
         <input type="text" name="email" value="{{ request('email') }}">
@@ -47,21 +46,23 @@
 
   <!-- result -->
   <div class="container">
-    <div class="side">
-      <div class="side-item">
-        {{-- @if (count($items) >0)
-          <p>全{{ $items->total() }}件中
-              {{  ($items->currentPage() -1) * $items->perPage() + 1}} - 
-              {{ (($items->currentPage() -1) * $items->perPage() + 1) + (count($items) -1)  }}件のデータが表示されています。</p>
+    <div class="between">
+      <div class="side">
+        {{-- @if (count($items->result) >0)
+        <p>全{{ $items->total() }}件中</p>
+          <p>
+            {{  ($items->currentPage() -1) * $items->perPage() + 1}} -
+            {{ (($items->currentPage() -1) * $items->perPage() + 1) + (count($items) -1)  }}件
+          </p>
         @else
-        <p>データがありません。</p>
-        @endif  --}}
+          <p>データがありません。</p>
+        @endif --}}
       </div>
-      <div class="side-item">
+      <div>
         {{-- {{ $items->links() }} --}}
-        {{-- {{ $data->appends(request()->input())->links() }} --}}
+        {{-- {{ $items->appends(request()->input())->links() }} --}}
       </div>
-      {{-- <p>全35件中　件</p> --}}
+
 
   </div>
   <table>
@@ -73,24 +74,25 @@
       <th>ご意見</th>
       <th></th>
     </tr>
-    @if (isset($items))
-    @foreach ($items as $item)
+    @if (isset($result))
+    @foreach ($results as $result)
     <tr>
-      <form action="{{ route('delete', ['id' => $item->id]) }}" method="POST">
+      <form action="{{ route('delete', ['id' => $result->id]) }}" method="POST">
       @csrf
-        <td>{{ $item->id }}</td>
-        <td>{{ $item->fullname }}</td>
-        <td>{{ $item->gender }}</td>
-        <td>{{ $item->email }}</td>
-        <td>{{ $item->opinion }}</td>
-        <input type="hidden" name="id" value="{{ $item->id }}">
-        <input type="hidden" name="fullname" value="{{ $item->fullname }}">
-        <input type="hidden" name="gender" value="{{ $item->gender }}">
-        <input type="hidden" name="email" value="{{ $item->email }}">
-        <input type="hidden" name="opinion" value="{{ $item->opinion }}">
+        <td>{{ $result->id }}</td>
+        <td>{{ $result->fullname }}</td>
+        <td>{{ $result->gender }}</td>
+        <td>{{ $result->email }}</td>
+        <td>{{ $result->opinion }}</td>
+        <input type="hidden" name="id" value="{{ $result->id }}">
+        <input type="hidden" name="fullname" value="{{ $result->fullname }}">
+        <input type="hidden" name="gender" value="{{ $result->gender }}">
+        <input type="hidden" name="email" value="{{ $result->email }}">
+        <input type="hidden" name="opinion" value="{{ Str::limit($result->opinion, 25, '(…)') }}">
         <td><button>削除</button></td>
       </form>
     </tr>
+
     @endforeach
     @endif
   </table>

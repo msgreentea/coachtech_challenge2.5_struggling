@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ChallengeRequest;
 use App\Models\Contact;
-use Illuminate\Pagination\Paginator;
 
 class ChallengeController extends Controller
 {
@@ -51,53 +50,34 @@ class ChallengeController extends Controller
     // システム管理
     public function system()
     {
-        // $data = Contact::simplePaginate(10);
-        // return view('system', $data);
-        $items = Contact::all();
-        return view('system', $items);
+        return view('system');
     }
 
     public function find(Request $request)
     {
-        // AND検索
-        $result = Contact::where('fullname', 'LIKE', "%{$request->fullname}%")
+        $results = Contact::where('fullname', 'LIKE', "%{$request->fullname}%")
             ->where('gender', 'LIKE', "%{$request->gender}%")
-            // ->where('created_at', 'LIKE', "%{$request->created_at}%")
             ->whereDate('created_at', 'LIKE', "%{$request->created_at}%")
             ->where('email', 'LIKE', "%{$request->email}%")->get();
 
-
-
-
-        // $keyword = Contact::when($request->gender == 1) {
-        //     $query->where('fullname', 'LIKE', "%{$request->fullname}%")
-        //     ->orwhere('gender', 'LIKE', "%{$request->gender}%")
-        //     ->orwhere('created_at', 'LIKE', "%{$request->created_at}%")
-        //     ->orwhere('email', 'LIKE', "%{$request->email}%")->get();
-        // }
-
-        // $pagination = Contact::paginate(10);
+        $pagination = Contact::simplePaginate(10);
 
         $items = [
-            // 'query' => $query,
-            // 'keyword' => $keyword,
-            'result' => $result,
+            'results' => $results,
             'fullname' => $request->fullname,
             'gender' => $request->gender,
             'created_at' => $request->created_at,
             'email' => $request->email,
-            // 'pagination' => $pagination
+            'pagination' => $pagination
         ];
         // dd($items);
         return view('system', $items);
     }
 
     public function delete(Request $request, $id)
-    // public function delete(Request $request)
     {
-        // Contact::find($request->id)->delete();
         $data = Contact::find($id);
         Contact::find($request->id)->delete();
-        return redirect('/');
+        return redirect('system');
     }
 }

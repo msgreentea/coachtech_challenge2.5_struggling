@@ -37,14 +37,12 @@ th {
 .radio {
   display: flex;
   align-items: center;
-  /* width: 100px; */
 }
 input[type="radio"] {
   width: 20px;
   height: 20px;
   padding: 10px;
   margin: 30px 30px 30px 0;
-  /* margin: 30px; */
   justify-content: left;
   transform: scale(2);
   border: 1px solid #ccc;
