@@ -38,7 +38,7 @@ class ChallengeController extends Controller
         return view('confirm', $items);
     }
 
-    public function register(Request $request)
+    public function register(ChallengeRequest $request)
     {
         $data = $request->all();
         Contact::create($data);
@@ -58,9 +58,9 @@ class ChallengeController extends Controller
         $results = Contact::where('fullname', 'LIKE', "%{$request->fullname}%")
             ->where('gender', 'LIKE', "%{$request->gender}%")
             ->whereDate('created_at', 'LIKE', "%{$request->created_at}%")
-            ->where('email', 'LIKE', "%{$request->email}%")->get();
+            ->where('email', 'LIKE', "%{$request->email}%")->paginate(10);
 
-        $pagination = Contact::simplePaginate(10);
+        // $pagination = Contact::simplePaginate(10);
 
         $items = [
             'results' => $results,
@@ -68,13 +68,13 @@ class ChallengeController extends Controller
             'gender' => $request->gender,
             'created_at' => $request->created_at,
             'email' => $request->email,
-            'pagination' => $pagination
+            // 'pagination' => $pagination
         ];
         // dd($items);
         return view('system', $items);
     }
 
-    public function delete(Request $request, $id)
+    public function delete(ChallengeRequest $request, $id)
     {
         $data = Contact::find($id);
         Contact::find($request->id)->delete();

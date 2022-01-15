@@ -59,7 +59,7 @@
         @endif --}}
       </div>
       <div>
-        {{-- {{ $items->links() }} --}}
+        {{-- {{ $results->links() }} --}}
         {{-- {{ $items->appends(request()->input())->links() }} --}}
       </div>
 
@@ -75,6 +75,7 @@
       <th></th>
     </tr>
     @if (isset($results))
+    {{-- <p class="paginate">{{ $results->links() }}</p> --}}
     @foreach ($results as $result)
     <tr>
       <form action="{{ route('delete', ['id' => $result->id]) }}" method="POST">
@@ -88,7 +89,7 @@
             <td>女性</td>
         @endif
         <td>{{ $result->email }}</td>
-        <td>{{ Str::limit($result->opinion, 25, '…') }}</td>
+        <td>{{ Str::limit($result->opinion, 50, '…') }}</td>
         <input type="hidden" name="id" value="{{ $result->id }}">
         <input type="hidden" name="fullname" value="{{ $result->fullname }}">
         <input type="hidden" name="gender" value="{{ $result->gender }}">
@@ -97,7 +98,6 @@
         <td><button class="btn">削除</button></td>
       </form>
     </tr>
-
     @endforeach
     @endif
   </table>
